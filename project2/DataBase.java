@@ -1,6 +1,6 @@
 /* 
 	 Name: Gregory Mann
-	 Assignment Number: 1
+	 Assignment Number: 2
 	 COSC 311 - Winter 2017
 */
 
@@ -16,7 +16,7 @@ public class DataBase {
 	private DataBaseArray myDB;
 	private int nextIndex;
 	private int maxSize;
-	private IndexArray id, first, last;
+	private LinkedList id, first, last;
 
 	private Scanner keyboard = new Scanner(System.in);
 	
@@ -24,18 +24,18 @@ public class DataBase {
 		maxSize = 100;
 		nextIndex = 0;
 		myDB = new DataBaseArray(maxSize);
-		id = new IndexArray(maxSize);
-		first = new IndexArray(maxSize);
-		last = new IndexArray(maxSize);
+		id = new LinkedList(maxSize);
+		first = new LinkedList(maxSize);
+		last = new LinkedList(maxSize);
 	}
 	
 	public DataBase(int sz){
 		maxSize = sz;
 		nextIndex = 0;
 		myDB = new DataBaseArray(maxSize);
-		id = new IndexArray(maxSize);
-		first = new IndexArray(maxSize);
-		last = new IndexArray(maxSize);
+		id = new LinkedList(maxSize);
+		first = new LinkedList(maxSize);
+		last = new LinkedList(maxSize);
 	}
 
 	// an interactive add method for the driver
@@ -111,7 +111,7 @@ public class DataBase {
 	}
 
 	// A negative number for dir prints decending order otherwise it prints accending
-	private void printIndex(IndexArray index, int dir){
+	private void printIndex(LinkedList index, int dir){
 		if(dir < 0){
 			index.iteratorInitBack();
 			while(index.hasPrevious())
