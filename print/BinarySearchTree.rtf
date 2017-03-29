@@ -1,7 +1,7 @@
 /* 
-	 Name: Gregory Mann
-	 Assignment Number: 2
-	 COSC 311 - Winter 2017
+   Name: Gregory Mann
+   Assignment Number: 3
+   COSC 311 - Winter 2017
 */
 
 /*
@@ -10,84 +10,84 @@
  */
 
 public class BinarySearchTree {
-	private Node head, pointer, parent; // pointer and parent are here because oops
+  private Node head, pointer, parent; // pointer and parent are here because oops
 
-	public BinarySearchTree(){
+  public BinarySearchTree(){
     head = null;
-	}
+  }
 
-	public BinarySearchTree(int size){
+  public BinarySearchTree(int size){
     head = null;
-	}
+  }
 
   // genaric node class with two pointers
-	private class Node {
-		private Node left, right;
-		private IndexRecord data;
+  private class Node {
+    private Node left, right;
+    private IndexRecord data;
 
-		public Node (IndexRecord data){
-			this.data = data;
-		}
+    public Node (IndexRecord data){
+      this.data = data;
+    }
 
-		public Node getRight(){
-			return right;
-		}
+    public Node getRight(){
+      return right;
+    }
 
-		public void setRight(Node right){
-			this.right = right;
-		}
+    public void setRight(Node right){
+      this.right = right;
+    }
 
-		public Node getLeft(){
-			return left;
-		}
+    public Node getLeft(){
+      return left;
+    }
 
-		public void setLeft(Node left){
-			this.left = left;
-		}
+    public void setLeft(Node left){
+      this.left = left;
+    }
 
-		public IndexRecord getData(){
-			return data;
-		}
-	}
+    public IndexRecord getData(){
+      return data;
+    }
+  }
 
-	// This method takes a search string to find search within the database array
-	// return index of the key in the database array or -1 if not found
-	public int findIt(String str){
-		IndexRecord key = new IndexRecord(str, 0);
+  // This method takes a search string to find search within the database array
+  // return index of the key in the database array or -1 if not found
+  public int findIt(String str){
+    IndexRecord key = new IndexRecord(str, 0);
     Node pointer = head;
     int comp = 0;
 
-		// iterate until a match is found or the pointer runs off the end of the list
-		while (pointer != null){
+    // iterate until a match is found or the pointer runs off the end of the list
+    while (pointer != null){
       comp = pointer.getData().compareTo(key);
 
-			if(comp == 0) 
+      if(comp == 0) 
         break;
       else if(comp > 0)
         pointer = pointer.getRight();
       else 
         pointer = pointer.getLeft();
-		}
+    }
 
-		return (pointer == null ? -1 : pointer.getData().getIndex());
-	}
-	
-	// takes a string as the "key" and the location its at in the database array
-	// returns true
-	public boolean add(String str, int loc){
-		IndexRecord key = new IndexRecord(str, loc);
+    return (pointer == null ? -1 : pointer.getData().getIndex());
+  }
+  
+  // takes a string as the "key" and the location its at in the database array
+  // returns true
+  public boolean add(String str, int loc){
+    IndexRecord key = new IndexRecord(str, loc);
 
     Node prevPointer = null;
     Node pointer = head;
     int comp = 0;
-		Node newNode = new Node(key);
+    Node newNode = new Node(key);
 
     // if nothing is in the list
     if(head == null){
       head = newNode;
     } else {
       // loop through until the match is found or pointer = null
-		  while (pointer != null){
+      while (pointer != null){
         comp = pointer.getData().compareTo(key);
         prevPointer = pointer;
 
@@ -95,7 +95,7 @@ public class BinarySearchTree {
           pointer = pointer.getRight();
         else 
           pointer = pointer.getLeft();
-		  }
+      }
 
       // set the correct child of the previouse pointer to the new node
       if(comp > 0)
@@ -103,12 +103,12 @@ public class BinarySearchTree {
       else
         prevPointer.setLeft(newNode);
     }
-		return true;
-	}
+    return true;
+  }
 
-	// removes something from the array based on the location in the databasae array
-	// returns false if it couldnt find it in the array and true if it was deleted
-	public boolean delete(int num){
+  // removes something from the array based on the location in the databasae array
+  // returns false if it couldnt find it in the array and true if it was deleted
+  public boolean delete(int num){
     pointer = null; 
     parent = null;
 
@@ -159,7 +159,7 @@ public class BinarySearchTree {
     }
 
     return true;
-	}
+  }
 
   // returns a reference to the child of a node
   private Node getChild(Node n){
