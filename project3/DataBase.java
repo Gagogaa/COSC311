@@ -16,7 +16,7 @@ public class DataBase {
 	private DataBaseArray myDB;
 	private int nextIndex;
 	private int maxSize;
-	private LinkedList id, first, last;
+	private BinarySearchTree id, first, last;
 
 	private Scanner keyboard = new Scanner(System.in);
 	
@@ -24,18 +24,18 @@ public class DataBase {
 		maxSize = 100;
 		nextIndex = 0;
 		myDB = new DataBaseArray(maxSize);
-		id = new LinkedList(maxSize);
-		first = new LinkedList(maxSize);
-		last = new LinkedList(maxSize);
+		id = new BinarySearchTree(maxSize);
+		first = new BinarySearchTree(maxSize);
+		last = new BinarySearchTree(maxSize);
 	}
 	
 	public DataBase(int sz){
 		maxSize = sz;
 		nextIndex = 0;
 		myDB = new DataBaseArray(maxSize);
-		id = new LinkedList(maxSize);
-		first = new LinkedList(maxSize);
-		last = new LinkedList(maxSize);
+		id = new BinarySearchTree(maxSize);
+		first = new BinarySearchTree(maxSize);
+		last = new BinarySearchTree(maxSize);
 	}
 
 	// an interactive add method for the driver
@@ -85,7 +85,6 @@ public class DataBase {
 		else {
 			// call the db to string and split it into tokens so they can be passed to the
 			// the index delete methods
-			String[] part = myDB.getByIndex(loc).toString().split(" ");
 			
 			myDB.delete(loc);
 			id.delete(loc);
@@ -111,20 +110,17 @@ public class DataBase {
 	}
 
 	// A negative number for dir prints decending order otherwise it prints accending
-	private void printIndex(LinkedList index, int dir){
-		if(dir < 0){
-			index.iteratorInitBack();
-			while(index.hasPrevious())
-				System.out.println(myDB.getByIndex(index.getPrevious()).toString());
-		} else {
-			index.iteratorInitFront();
-			while(index.hasNext())
-				System.out.println(myDB.getByIndex(index.getNext()).toString());
+	private void printIndex(BinarySearchTree index, int dir){
+		if(dir < 0){ // print descending
+      index.printDescending(myDB);
+		} else { // print ascending
+      index.printAscending(myDB);
 		}
 		System.out.println("");
 	}
 
 	// these methods display the contents of the database
+	
 	public void ListByIDAscending(){
 		printIndex(id, 0);
 	}
