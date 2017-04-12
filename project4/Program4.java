@@ -22,15 +22,19 @@ public class Program4 {
     //MergeSort merge = new MergeSort();
 
     // TODO: implement the sorts
-    //Stats heapSortStats = benchmark(heap, acendingData, decendingData, randomData);
-    Stats quickSortStats = benchmark(quick, acendingData, decendingData, randomData);
+    Stats heapSortStats = benchmark(heap, acendingData, decendingData, randomData);
+    //Stats quickSortStats = benchmark(quick, acendingData, decendingData, randomData);
     //Stats mergeSortStats = benchmark(merge, acendingData, decendingData, randomData);
 
     //System.out.println("Merege Sort: ");
     //printTime(mergeSortStats);
 
-    System.out.println("Quick Sort: ");
-    printTime(quickSortStats);
+    //System.out.println("Quick Sort: ");
+    //printTime(quickSortStats);
+
+    System.out.println("Heap Sort: ");
+    printTime(heapSortStats);
+
 
     // get the prefix for the file name
     System.out.println("Please enter the prefix for the file names");
@@ -39,7 +43,8 @@ public class Program4 {
     keyboard.close();
 
     //writeData(prefix, mergeSortStats);
-    writeData(prefix, "Quick-Sort", quickSortStats);
+    //writeData(prefix, "Quick-Sort", quickSortStats);
+    writeData(prefix, "Heap-Sort", heapSortStats);
 
   }
 
