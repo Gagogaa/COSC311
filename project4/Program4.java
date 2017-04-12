@@ -17,8 +17,8 @@ public class Program4 {
     readData(randomText, randomData);
 
     // create the sort objects
-    //HeapSort heap = new HeapSort();
-    QuickSort quick = new QuickSort();
+    HeapSort heap = new HeapSort();
+    //QuickSort quick = new QuickSort();
     //MergeSort merge = new MergeSort();
 
     // TODO: implement the sorts
