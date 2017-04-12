@@ -28,10 +28,8 @@ public class Program4 {
 
     // TODO: display the data
     // TODO: make this into a method
-    System.out.println("Acending Time: " + mergeSortStats.getAcendingTime());
-    System.out.println("Decending Time: " + mergeSortStats.getDecendingTime());
-    System.out.println("Random Time: " + mergeSortStats.getRandomTime());
-    System.out.println();
+    System.out.println("Merege Sort: ");
+    printTime(mergeSortStats);
 
     // write out the files
     System.out.println("Please enter the prefix for the file names");
@@ -42,18 +40,35 @@ public class Program4 {
     writeData(prefix, mergeSortStats);
   }
 
-  // prints the sorted data out to a file for inspection
-  private static void writeData(String prefix, Stats data){
-    // TODO put this into a method of its own so its easier to print out the three streams
-    File acending = new File(prefix + "-acendingSorted.txt");
-    try {
-      PrintWriter acendingData = new PrintWriter(acending);
+  // prints the results out the the screen
+  private void printTime(Stats data){
+    System.out.println("\t Acending Time: " + data.getAcendingTime());
+    System.out.println("\t Decending Time: " + data.getDecendingTime());
+    System.out.println("\t Random Time: " + data.getRandomTime());
+    System.out.println();
+  }
 
-      for(int i = 0; i < data.getAcendingData().length; i++){
-        acendingData.println(data.getAcendingData()[i]);
+  // writes the sorted data out to a file for inspection
+  private static void writeData(String prefix, Stats data){
+    File acending = new File(prefix + "-acendingSorted.txt");
+    File decending = new File(prefix + "-decendingSorted.txt");
+    File random = new File(prefix + "-randomSorted.txt");
+
+    writeToDisk(data.getAcendingData(), acending);
+    writeToDisk(data.getDecendingData(), decending);
+    writeToDisk(data.getRandomData(), random);
+  }
+
+  // writes files to the disk
+  private static void writeToDisk(int[] a, File file){
+    try {
+      PrintWriter write = new PrintWriter(file);
+
+      for(int i = 0; i < a.length; i++){
+        write.println(a[i]);
       }
 
-      acendingData.close();
+      write.close();
     } catch(Exception e){
       e.printStackTrace();
     }
