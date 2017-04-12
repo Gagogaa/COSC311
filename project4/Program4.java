@@ -32,7 +32,6 @@ public class Program4 {
     System.out.println("Quick Sort: ");
     printTime(quickSortStats);
 
-
     // get the prefix for the file name
     System.out.println("Please enter the prefix for the file names");
     Scanner keyboard = new Scanner(System.in);
@@ -40,7 +39,7 @@ public class Program4 {
     keyboard.close();
 
     //writeData(prefix, mergeSortStats);
-    writeData(prefix, quickSortStats);
+    writeData(prefix, "Quick-Sort", quickSortStats);
 
   }
 
@@ -53,10 +52,10 @@ public class Program4 {
   }
 
   // writes the sorted data out to a file for inspection
-  private static void writeData(String prefix, Stats data){
-    File acending = new File(prefix + "-acending-sorted.txt");
-    File decending = new File(prefix + "-decending-sorted.txt");
-    File random = new File(prefix + "-random-sorted.txt");
+  private static void writeData(String prefix, String method, Stats data){
+    File acending = new File(prefix + "-" + method + "-acending-sorted.txt");
+    File decending = new File(prefix + "-" + method + "-decending-sorted.txt");
+    File random = new File(prefix + "-" + method + "-random-sorted.txt");
 
     writeToDisk(data.getAcendingData(), acending);
     writeToDisk(data.getDecendingData(), decending);
