@@ -21,27 +21,29 @@ public class Program4 {
     //QuickSort quick = new QuickSort();
     MergeSort merge = new MergeSort();
 
-    // TODO: implement the sorts and print the time in a human readable format
+    // TODO: implement the sorts
     //Stats heapSortStats = benchmark(heap, acendingData, decendingData, randomData);
     //Stats quickSortStats = benchmark(quick, acendingData, decendingData, randomData);
     Stats mergeSortStats = benchmark(merge, acendingData, decendingData, randomData);
 
-    // TODO: display the data
-    // TODO: make this into a method
     System.out.println("Merege Sort: ");
     printTime(mergeSortStats);
 
-    // write out the files
+    // get the prefix for the file name
     System.out.println("Please enter the prefix for the file names");
     Scanner keyboard = new Scanner(System.in);
     String prefix = keyboard.next();
     keyboard.close();
 
     writeData(prefix, mergeSortStats);
+
+    for(int i = 0; i < randomData.length; i++){
+      System.out.println(randomData[i]);
+    }
   }
 
   // prints the results out the the screen
-  private void printTime(Stats data){
+  private static void printTime(Stats data){
     System.out.println("\t Acending Time: " + data.getAcendingTime());
     System.out.println("\t Decending Time: " + data.getDecendingTime());
     System.out.println("\t Random Time: " + data.getRandomTime());
@@ -50,9 +52,9 @@ public class Program4 {
 
   // writes the sorted data out to a file for inspection
   private static void writeData(String prefix, Stats data){
-    File acending = new File(prefix + "-acendingSorted.txt");
-    File decending = new File(prefix + "-decendingSorted.txt");
-    File random = new File(prefix + "-randomSorted.txt");
+    File acending = new File(prefix + "-acending-sorted.txt");
+    File decending = new File(prefix + "-decending-sorted.txt");
+    File random = new File(prefix + "-random-sorted.txt");
 
     writeToDisk(data.getAcendingData(), acending);
     writeToDisk(data.getDecendingData(), decending);
@@ -91,13 +93,15 @@ public class Program4 {
 
   // returns a Stats object containing the results of the benchmark
   private static Stats benchmark(Sorter method, int[] acendingData, int[] decendingData, int[] randomData){
-    int[] acd = copy(acendingData);
-    int[] dcd = copy(decendingData);
-    int[] rad = copy(randomData);
-    long acendingTime = timing(method, acd);
-    long decendingTime = timing(method, dcd);
-    long randomTime = timing(method, rad);
-    return new Stats(acendingTime, decendingTime, randomTime, acd, dcd, rad);
+    int[] acendingDataCopy = copy(acendingData);
+    int[] decendingDataCopy = copy(decendingData);
+    int[] randomDataCopy = copy(randomData);
+
+    long acendingTime = timing(method, acendingDataCopy);
+    long decendingTime = timing(method, decendingDataCopy);
+    long randomTime = timing(method, randomDataCopy);
+
+    return new Stats(acendingTime, decendingTime, randomTime, acendingDataCopy, decendingDataCopy, randomDataCopy);
   }
 
   // return a deep copy of an array
@@ -110,6 +114,7 @@ public class Program4 {
     return b;
   }
 
+  // get the difference in time for the sorting method on a dataset
   private static long timing(Sorter method, int[] data){
     long startTime = System.nanoTime();
     method.sort(data);
