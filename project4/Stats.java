@@ -1,14 +1,16 @@
 // a simple data storage object
 public class Stats {
-  //TODO set the array data refs
   private long acendingTime, decendingTime, randomTime;
   private int[] acendingData, decendingData, randomData;
 
-  // 3 arg constructor
-  public Stats(long a, long d, long r){
+  // 6 arg constructor
+  public Stats(long a, long d, long r, int[] ad, int[] dd, int[] rd){
     acendingTime = a;
     decendingTime = d;
     randomTime = r;
+    acendingData = ad;
+    decendingData = dd; 
+    randomData = rd;
   }
 
   public long getAcendingTime(){
@@ -23,7 +25,15 @@ public class Stats {
     return randomTime;
   }
 
-  public String toString(){
-    return "Hello, world";
+  public int[] getAcendingData(){
+    return acendingData;
+  }
+
+  public int[] getDecendingData(){
+    return decendingData; 
+  }
+
+  public int[] getRandomData(){
+    return randomData;
   }
 }

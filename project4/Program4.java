@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class Program4 {
@@ -26,11 +27,36 @@ public class Program4 {
     Stats mergeSortStats = benchmark(merge, acendingData, decendingData, randomData);
 
     // TODO: display the data
-
+    // TODO: make this into a method
     System.out.println("Acending Time: " + mergeSortStats.getAcendingTime());
     System.out.println("Decending Time: " + mergeSortStats.getDecendingTime());
     System.out.println("Random Time: " + mergeSortStats.getRandomTime());
     System.out.println();
+
+    // write out the files
+    System.out.println("Please enter the prefix for the file names");
+    Scanner keyboard = new Scanner(System.in);
+    String prefix = keyboard.next();
+    keyboard.close();
+
+    writeData(prefix, mergeSortStats);
+  }
+
+  // prints the sorted data out to a file for inspection
+  private static void writeData(String prefix, Stats data){
+    // TODO put this into a method of its own so its easier to print out the three streams
+    File acending = new File(prefix + "-acendingSorted.txt");
+    try {
+      PrintWriter acendingData = new PrintWriter(acending);
+
+      for(int i = 0; i < data.getAcendingData().length; i++){
+        acendingData.println(data.getAcendingData()[i]);
+      }
+
+      acendingData.close();
+    } catch(Exception e){
+      e.printStackTrace();
+    }
   }
 
   // reads data in from the files
@@ -42,6 +68,7 @@ public class Program4 {
       while(file.hasNextInt())
         array[i++] = file.nextInt();
 
+      file.close();
     } catch(Exception e){
       e.printStackTrace();
     }
@@ -49,11 +76,13 @@ public class Program4 {
 
   // returns a Stats object containing the results of the benchmark
   private static Stats benchmark(Sorter method, int[] acendingData, int[] decendingData, int[] randomData){
-    // TODO: copy the arrays that are being passed in because they will overrite the data
-    long acendingTime = timing(method, copy(acendingData));
-    long decendingTime = timing(method, copy(decendingData));
-    long randomTime = timing(method, copy(randomData));
-    return new Stats(acendingTime, decendingTime, randomTime);
+    int[] acd = copy(acendingData);
+    int[] dcd = copy(decendingData);
+    int[] rad = copy(randomData);
+    long acendingTime = timing(method, acd);
+    long decendingTime = timing(method, dcd);
+    long randomTime = timing(method, rad);
+    return new Stats(acendingTime, decendingTime, randomTime, acd, dcd, rad);
   }
 
   // return a deep copy of an array
@@ -63,7 +92,6 @@ public class Program4 {
     for(int i = 0; i < a.length; i++){
       b[i] = a[i];
     }
-
     return b;
   }
 
