@@ -1,12 +1,11 @@
-// a simple data holding object
+// a simple data storage object
 public class Stats {
-  // System.currentTimeMillis()
-  private long acendingTime;
-  private long decendingTime;
-  private long randomTime;
+  //TODO set the array data refs
+  private long acendingTime, decendingTime, randomTime;
+  private int[] acendingData, decendingData, randomData;
 
   // 3 arg constructor
-  public void Stats(long a, long d, long r){
+  public Stats(long a, long d, long r){
     acendingTime = a;
     decendingTime = d;
     randomTime = r;
@@ -20,7 +19,11 @@ public class Stats {
     return decendingTime;
   }
 
-  public long getRandomeTime(){
+  public long getRandomTime(){
     return randomTime;
+  }
+
+  public String toString(){
+    return "Hello, world";
   }
 }
