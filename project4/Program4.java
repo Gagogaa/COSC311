@@ -18,23 +18,24 @@ public class Program4 {
 
     // create the sort objects
     HeapSort heap = new HeapSort();
-    //QuickSort quick = new QuickSort();
-    //MergeSort merge = new MergeSort();
+    QuickSort quick = new QuickSort();
+    MergeSort merge = new MergeSort();
 
-    // TODO: implement the sorts
+    // benchmark the sorts
     Stats heapSortStats = benchmark(heap, acendingData, decendingData, randomData);
-    //Stats quickSortStats = benchmark(quick, acendingData, decendingData, randomData);
-    //Stats mergeSortStats = benchmark(merge, acendingData, decendingData, randomData);
+    Stats quickSortStats = benchmark(quick, acendingData, decendingData, randomData);
+    Stats mergeSortStats = benchmark(merge, acendingData, decendingData, randomData);
 
-    //System.out.println("Merege Sort: ");
-    //printTime(mergeSortStats);
-
-    //System.out.println("Quick Sort: ");
-    //printTime(quickSortStats);
+    System.out.println("---------SORT TIME IN NANO SECONDS---------");
 
     System.out.println("Heap Sort: ");
     printTime(heapSortStats);
 
+    System.out.println("Quick Sort: ");
+    printTime(quickSortStats);
+
+    System.out.println("Merege Sort: ");
+    printTime(mergeSortStats);
 
     // get the prefix for the file name
     System.out.println("Please enter the prefix for the file names");
@@ -42,10 +43,9 @@ public class Program4 {
     String prefix = keyboard.next();
     keyboard.close();
 
-    //writeData(prefix, mergeSortStats);
-    //writeData(prefix, "Quick-Sort", quickSortStats);
     writeData(prefix, "Heap-Sort", heapSortStats);
-
+    writeData(prefix, "Quick-Sort", quickSortStats);
+    writeData(prefix, "Merege-Sort", mergeSortStats);
   }
 
   // prints the results out the the screen

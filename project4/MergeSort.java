@@ -1,13 +1,12 @@
 public class MergeSort implements Sorter {
   int[] array;
+
   @Override
   public void sort(int[] a){
-    // empty array of n elements
     array = a;
-    int[] workspace = new int[a.length];
 
+    int[] workspace = new int[a.length];
     reMergeSort(workspace, 0, a.length - 1);
-    // TODO copy the contents of workspace over to a if the data isnt sorted
   }
 
   private void reMergeSort(int[] workspace, int lowerBound, int upperBound){
@@ -20,18 +19,19 @@ public class MergeSort implements Sorter {
       reMergeSort(workspace, lowerBound, mid);
 
       // sort upper half
-      reMergeSort(workspace, mid+1, upperBound);
+      reMergeSort(workspace, mid + 1, upperBound);
 
       // merge them
-      merge(workspace, lowerBound, mid+1, upperBound);
+      merge(workspace, lowerBound, mid + 1, upperBound);
     }
   }
 
+  // mergeing process
   private void merge(int[] workspace, int lowPtr, int highPtr, int upperBound){
     int j = 0; // workspace index
     int lowerBound = lowPtr;
     int mid = highPtr - 1;
-    int n = upperBound - lowerBound+1; // number of items
+    int n = upperBound - lowerBound + 1; // number of items
 
     while(lowPtr <= mid && highPtr <= upperBound)
       if(array[lowPtr] < array[highPtr])
@@ -46,7 +46,7 @@ public class MergeSort implements Sorter {
       workspace[j++] = array[highPtr++];
 
     for(j = 0; j < n; j++){
-      array[lowerBound+j] = workspace[j];
+      array[lowerBound + j] = workspace[j];
     }
   }
 }
