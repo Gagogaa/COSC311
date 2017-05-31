@@ -3,6 +3,7 @@ import java.io.PrintWriter;
 import java.util.*;
 
 public class Program4 {
+  public static int count = 0;
   public static void main(String[] args){
     String acendingText = "dataAscend.txt";
     String decendingText = "dataDescend.txt";
@@ -58,9 +59,9 @@ public class Program4 {
 
   // writes the sorted data out to a file for inspection
   private static void writeData(String prefix, String method, Stats data){
-    File acending = new File(prefix + "-" + method + "-acending-sorted.txt");
-    File decending = new File(prefix + "-" + method + "-decending-sorted.txt");
-    File random = new File(prefix + "-" + method + "-random-sorted.txt");
+    File acending = new File(prefix + count++);
+    File decending = new File(prefix + count++);
+    File random = new File(prefix + count++);
 
     writeToDisk(data.getAcendingData(), acending);
     writeToDisk(data.getDecendingData(), decending);
